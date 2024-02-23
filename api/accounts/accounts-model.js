@@ -1,4 +1,5 @@
-const db = require('../../data/db-config')
+const db = require('../../data/db-config');
+const { get } = require('./accounts-router');
 
 const getAll = () => {
   // DO YOUR MAGIC
@@ -18,8 +19,10 @@ const create = async account => {
   return getById(id)
 }
 
-const updateById = (id, account) => {
+const updateById = async (id, account) => {
   // DO YOUR MAGIC
+  await db('accounts').where('id', id).update(account)
+  return getById(id)
 }
 
 const deleteById = id => {
