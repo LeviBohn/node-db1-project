@@ -10,7 +10,7 @@ exports.checkAccountPayload = (req, res, next) => {
   } else if (typeof name !== 'string') {
     error.message = 'name of account must be a string'
   } else if (name.trim().length < 3 || name.trim().length > 100) {
-    error.message = 'name of account must be between 3 an 100'
+    error.message = 'name of account must be between 3 and 100'
   } else if (typeof budget !== 'number' || isNaN(budget)) {
     error.message = 'budget of account must be a number'
   } else if (budget < 0 || budget > 1000000) {
@@ -48,7 +48,7 @@ exports.checkAccountId = async (req, res, next) => {
   try {
     const account = await Account.getById(req.params.id)
     if (!account) {
-      next({ status: 404, message: 'not found' })
+      next({ status: 404, message: 'account not found' })
     } else {
       req.account = account
       next()
